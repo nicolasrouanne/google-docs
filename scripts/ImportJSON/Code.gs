@@ -523,5 +523,21 @@ function toBool_(value) {
 function convertToBool_(map, key) {
   if (map[key] != null) {
     map[key] = toBool_(map[key]);
-  }  
+  }
+}
+
+/**
+ * Add Basic Auth authentication support
+ Taken from http://stackoverflow.com/questions/14555134/importing-json-with-authentication-in-google-spreadsheet-campaign-monitor
+ */
+function ImportJSONBasicAuthentication(url, query, parseOptions, username, password) {
+
+  var fetchOptions = {
+    "headers" : {
+       "Authorization" : 'Basic ' + Utilities.base64Encode(username + ':' + password)
+    },
+    muteHttpExceptions: true
+  };
+
+   return ImportJSONAdvanced(url, fetchOptions, query, parseOptions, includeXPath_, defaultTransform_);
 }
